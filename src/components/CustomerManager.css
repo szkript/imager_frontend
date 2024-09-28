@@ -1,0 +1,42 @@
+.customer-manager-container {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .customer-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .customer-input {
+    padding: 8px;
+    font-size: 14px;
+  }
+  
+  .customer-button {
+    padding: 8px 16px;
+    font-size: 14px;
+    align-self: flex-start;
+  }
+  
+  .customer-list {
+    margin-top: 20px;
+  }
+  
+  .customer-item {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .customer-delete-button {
+    color: red;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  

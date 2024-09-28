@@ -1,0 +1,21 @@
+.image-gallery-container {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.image-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.image-item {
+  flex: 1 0 100px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.gallery-image {
+  max-width: 100%;
+  height: auto;
+}

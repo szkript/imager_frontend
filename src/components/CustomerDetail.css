@@ -1,0 +1,38 @@
+.customer-detail-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  color: white; /* Szöveg színe fehér */
+}
+
+.customer-detail-nav h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+  color: white; /* Ügyfél neve fehér színnel */
+}
+
+.customer-detail-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 20px;
+}
+
+.customer-detail-nav a {
+  text-decoration: none;
+  color: white;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.customer-detail-nav a:hover {
+  background-color: #555;
+}

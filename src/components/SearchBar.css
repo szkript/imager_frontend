@@ -1,0 +1,55 @@
+.search-bar {
+  position: relative; /* Pozicionálás a legördülő lista számára */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-bar input[type="text"] {
+  width: 100%;
+  max-width: 300px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 14px; /* Betűméret mobilon és asztali gépen */
+}
+
+.search-dropdown {
+  position: absolute;
+  top: 100%; /* Közvetlenül az input mező alatt */
+  left: 0;
+  width: 100%;
+  max-width: 300px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  z-index: 1000;
+  max-height: 200px; /* Legördülő lista maximális magassága */
+  overflow-y: auto; /* Görgetés, ha túl sok találat van */
+}
+
+.search-dropdown li {
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.search-dropdown li:hover {
+  background-color: #f0f0f0;
+}
+
+@media screen and (max-width: 600px) {
+  .search-bar input[type="text"] {
+    max-width: 90%; /* Szélesség mobil eszközökön */
+  }
+
+  .search-dropdown {
+    max-width: 90%; /* Legördülő lista szélessége mobilon */
+  }
+}
