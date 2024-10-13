@@ -30,8 +30,18 @@ const SearchBar = () => {
     setSearchTerm(e.target.value);
   };
 
-  const handleSelectCustomer = (customerId) => {
-    navigate(`/customer/${customerId}/entries`);
+  const handleSelectCustomer = (customer) => {
+    console.log(customer);
+    const [customerId, matchType] = customer.matchType.split('|');
+    if (matchType === 'generalInfo') {
+      navigate(`/customer/${customerId}/info`);
+    } else if (matchType === 'entries') {
+      navigate(`/customer/${customerId}/entries`);
+    } else if (matchType === 'topic') {
+      navigate(`/customer/${customerId}/topic`);
+    } else {
+      console.error('Unknown matchType:', matchType);
+    }
     setSearchTerm(''); // Keresési mező kiürítése
   };
 
@@ -46,7 +56,7 @@ const SearchBar = () => {
           if (e.key === 'Enter') {
             const bestMatch = customers[0];
             if (bestMatch) {
-              handleSelectCustomer(bestMatch._id);
+              handleSelectCustomer(bestMatch);
             }
           }
         }}
@@ -56,7 +66,7 @@ const SearchBar = () => {
           {customers.map((customer) => (
             <li
               key={customer._id}
-              onClick={() => handleSelectCustomer(customer._id)}
+              onClick={() => handleSelectCustomer(customer)}
             >
               {customer.name} ({customer.entries.length} matching entries)
             </li>
