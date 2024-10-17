@@ -32,15 +32,14 @@ const SearchBar = () => {
 
   const handleSelectCustomer = (customer) => {
     console.log(customer);
-    const [customerId, matchType] = customer.matchType.split('|');
-    if (matchType === 'generalInfo') {
-      navigate(`/customer/${customerId}/info`);
-    } else if (matchType === 'entries') {
-      navigate(`/customer/${customerId}/entries`);
-    } else if (matchType === 'topic') {
-      navigate(`/customer/${customerId}/topic`);
+    if (customer.matchType === 'generalInfo') {
+      navigate(`/customer/${customer._id}/info`);
+    } else if (customer.matchType === 'entries' || customer.matchType === 'customer') {
+      navigate(`/customer/${customer._id}/entries`);
+    } else if (customer.matchType === 'topic') {
+      navigate(`/customer/${customer._id}/topic`);
     } else {
-      console.error('Unknown matchType:', matchType);
+      console.error('Unknown matchType:', customer.matchType);
     }
     setSearchTerm(''); // Keresési mező kiürítése
   };
