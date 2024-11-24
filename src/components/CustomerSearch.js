@@ -45,15 +45,6 @@ const CustomerSearch = () => {
 
   return (
     <div>
-      {/*
-      <input
-        type="text"
-        placeholder="Search customers..."
-        value={searchTerm}
-        onChange={handleSearch}
-        onKeyPress={handleKeyPress} // Enter billentyű esemény figyelése
-      />
-      */}
       <ul>
         {filteredCustomers.map((customer) => (
           <li key={customer._id} onClick={() => handleSelectCustomer(customer._id)}>

@@ -53,3 +53,25 @@
     max-width: 90%; /* Legördülő lista szélessége mobilon */
   }
 }
+
+.search-result {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+}
+
+.search-result.customer {
+  background-color: #e3f2fd;
+}
+
+.search-result.topic {
+  background-color: #e8f5e9;
+}
+
+.search-result.entries {
+  background-color: #fff3e0;
+}
+
+.search-dropdown li:not(:last-child) {
+  border-bottom: 1px solid #eee;
+}

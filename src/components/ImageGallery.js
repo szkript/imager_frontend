@@ -33,11 +33,3 @@ const ImageGallery = ({ customerId }) => {
 };
 
 export default ImageGallery;
- a = 1
- b = 2
-
- result = összeadás(1,6)
- 
- function összeadás(a,b){
-  return a+b;
- }
