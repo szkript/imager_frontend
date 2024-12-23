@@ -245,7 +245,6 @@ const CustomerEntries = () => {
               className="topic-input"
             />
             <div className="show-all-topics-icon" onClick={handleShowAllTopics}>
-
               □
             </div>
   
@@ -290,7 +289,6 @@ const CustomerEntries = () => {
                 onClick={() => openModal(entry.imageBase64)}
               />
             )}
-
             {editingEntryId === entry._id ? (
               <div>
                 <textarea
@@ -305,27 +303,33 @@ const CustomerEntries = () => {
                 }}>Cancel</button>
               </div>
             ) : (
-              <>
-                <p className="entry-text">{entry.text}</p>
-                <button onClick={() => {
-                  setEditingEntryId(entry._id);
-                  setEditText(entry.text);
-                }}>Edit</button>
-              </>
+              <p className="entry-text">{entry.text}</p>
             )}
-            <p className="entry-timestamp">
-              {new Date(entry.createdAt).toLocaleString()}
-            </p>
-            <p>Topic: {entry.topic ? entry.topic.name : 'No topic assigned'}</p>
             {entry.fileBase64 && (
               <button onClick={() => openFileModal(entry)}>
                 View {entry.fileName}
               </button>
             )}
+            <div className="entry-footer">
+              <span className="entry-timestamp">
+                {new Date(entry.createdAt).toLocaleString()}
+              </span>
+              <span className="entry-topic">
+                Topic: {entry.topic ? entry.topic.name : 'No topic assigned'}
+              </span>
+              <button 
+                className="edit-button"
+                onClick={() => {
+                  setEditingEntryId(entry._id);
+                  setEditText(entry.text);
+                }}
+              >
+                Edit
+              </button>
+            </div>
           </div>
         ))}
       </div>
-  
       {modalOpen && (
         <>
           {/* Sötét háttér a modál mögött */}
@@ -341,6 +345,5 @@ const CustomerEntries = () => {
       )}
     </div>
   );  
-
 };
 export default CustomerEntries;
