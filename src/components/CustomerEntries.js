@@ -54,7 +54,7 @@ const CustomerEntries = () => {
     if (value.trim() !== '') {
       const filtered = topics.filter((topic) =>
         topic.name.toLowerCase().includes(value.toLowerCase())
-      );
+      );    
       setFilteredTopics(filtered);
     } else {
       setFilteredTopics([]);
