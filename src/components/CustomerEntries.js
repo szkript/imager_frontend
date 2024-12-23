@@ -23,6 +23,9 @@ const CustomerEntries = () => {
   const [newTopic, setNewTopic] = useState('');
   const [latestTopic, setLatestTopic] = useState('');
 
+  const [editingEntryId, setEditingEntryId] = useState(null);
+  const [editText, setEditText] = useState('');
+
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -46,6 +49,23 @@ const CustomerEntries = () => {
 
     fetchEntriesAndCustomer();
   }, [customerId]);
+
+  const handleEditEntry = async (entryId) => {
+    try {
+      const response = await axios.put(`http://localhost:5000/api/entries/${entryId}`, {
+        text: editText
+      });
+      
+      setEntries(entries.map(entry => 
+        entry._id === entryId ? {...entry, text: editText} : entry
+      ));
+      
+      setEditingEntryId(null);
+      setEditText('');
+    } catch (error) {
+      console.error('Error updating entry:', error);
+    }
+  };
 
   const handleTopicChange = (e) => {
     const value = e.target.value;
@@ -225,7 +245,8 @@ const CustomerEntries = () => {
               className="topic-input"
             />
             <div className="show-all-topics-icon" onClick={handleShowAllTopics}>
-              &#x25A1;
+
+              □
             </div>
   
             {filteredTopics.length > 0 && (
@@ -269,7 +290,29 @@ const CustomerEntries = () => {
                 onClick={() => openModal(entry.imageBase64)}
               />
             )}
-            <p className="entry-text">{entry.text}</p>
+
+            {editingEntryId === entry._id ? (
+              <div>
+                <textarea
+                  value={editText}
+                  onChange={(e) => setEditText(e.target.value)}
+                  className="entry-textarea"
+                />
+                <button onClick={() => handleEditEntry(entry._id)}>Save</button>
+                <button onClick={() => {
+                  setEditingEntryId(null);
+                  setEditText('');
+                }}>Cancel</button>
+              </div>
+            ) : (
+              <>
+                <p className="entry-text">{entry.text}</p>
+                <button onClick={() => {
+                  setEditingEntryId(entry._id);
+                  setEditText(entry.text);
+                }}>Edit</button>
+              </>
+            )}
             <p className="entry-timestamp">
               {new Date(entry.createdAt).toLocaleString()}
             </p>
@@ -298,6 +341,6 @@ const CustomerEntries = () => {
       )}
     </div>
   );  
-};
 
+};
 export default CustomerEntries;
