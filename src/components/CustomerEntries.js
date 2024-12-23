@@ -49,38 +49,45 @@ const CustomerEntries = () => {
 
     fetchEntriesAndCustomer();
   }, [customerId]);
+    const handleDeleteEntry = async (entryId) => {
+      try {
+        await axios.delete(`http://localhost:5000/api/entries/${entryId}`);
+        setEntries(entries.filter(entry => entry._id !== entryId));
+      } catch (error) {
+        console.error('Error deleting entry:', error);
+      }
+    };
 
-  const handleEditEntry = async (entryId) => {
-    try {
-      const response = await axios.put(`http://localhost:5000/api/entries/${entryId}`, {
-        text: editText
-      });
+    const handleEditEntry = async (entryId) => {
+      try {
+        const response = await axios.put(`http://localhost:5000/api/entries/${entryId}`, {
+          text: editText
+        });
       
-      setEntries(entries.map(entry => 
-        entry._id === entryId ? {...entry, text: editText} : entry
-      ));
+        setEntries(entries.map(entry => 
+          entry._id === entryId ? {...entry, text: editText} : entry
+        ));
       
-      setEditingEntryId(null);
-      setEditText('');
-    } catch (error) {
-      console.error('Error updating entry:', error);
-    }
-  };
+        setEditingEntryId(null);
+        setEditText('');
+      } catch (error) {
+        console.error('Error updating entry:', error);
+      }
+    };
 
-  const handleTopicChange = (e) => {
-    const value = e.target.value;
-    setNewTopic(value);
+    const handleTopicChange = (e) => {
+      const value = e.target.value;
+      setNewTopic(value);
 
-    if (value.trim() !== '') {
-      const filtered = topics.filter((topic) =>
-        topic.name.toLowerCase().includes(value.toLowerCase())
-      );    
-      setFilteredTopics(filtered);
-    } else {
-      setFilteredTopics([]);
-    }
-  };
-
+      if (value.trim() !== '') {
+        const filtered = topics.filter((topic) =>
+          topic.name.toLowerCase().includes(value.toLowerCase())
+        );    
+        setFilteredTopics(filtered);
+      } else {
+        setFilteredTopics([]);
+      }
+    };
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
@@ -317,15 +324,23 @@ const CustomerEntries = () => {
               <span className="entry-topic">
                 Topic: {entry.topic ? entry.topic.name : 'No topic assigned'}
               </span>
-              <button 
-                className="edit-button"
-                onClick={() => {
-                  setEditingEntryId(entry._id);
-                  setEditText(entry.text);
-                }}
-              >
-                Edit
-              </button>
+              <div className="entry-actions">
+                <button 
+                  className="edit-button"
+                  onClick={() => {
+                    setEditingEntryId(entry._id);
+                    setEditText(entry.text);
+                  }}
+                >
+                  Edit
+                </button>
+                <button 
+                  className="delete-button"
+                  onClick={() => handleDeleteEntry(entry._id)}
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           </div>
         ))}
